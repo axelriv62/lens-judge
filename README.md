@@ -1,6 +1,40 @@
-## Diagramme de classes : 
+## Diagramme de classes :
 
+```plantuml
+@startuml
+interface IExecutor {
++ executeProgram(): void
+  }
 
+class ExecutorC {
++ executeProgram(): void
+  }
+
+class ExecutorCPP {
++ executeProgram(): void
+  }
+
+class ExecutorJava {
++ executeProgram(): void
+  }
+
+class ExecutorPython {
++ executeProgram(): void
+  }
+
+class Context {
+- executor: Executor
++ setExecutor(e: Executor): void
++ execute(): void
+  }
+
+Context --> Executor
+Executor <|.. ExecutorC
+Executor <|.. ExecutorCPP
+Executor <|.. ExecutorJava
+Executor <|.. ExecutorPython
+@enduml 
+```
 
 ## Liste des tâches :
 
