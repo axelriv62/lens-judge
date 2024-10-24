@@ -3,13 +3,10 @@ package lens.judge.b5;
 import lens.judge.b5.problem.Problem;
 import lens.judge.b5.problem.TestCase;
 import lens.judge.b5.verifier.OrderToleranceComparer;
-import lens.judge.b5.verifier.PrecisionToleranceComparer;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -24,8 +21,8 @@ public class Main {
             // Create a list of test cases
             List<TestCase> testCases = new ArrayList<>();
             testCases.add(new TestCase(
-                    new File("app/src/main/java/lens/judge/b5/verifier/"+inputFilePath),
-                    new File("app/src/main/java/lens/judge/b5/verifier/"+expectedFilePath)
+                    new File("app/src/main/java/lens/judge/b5/verifier/" + inputFilePath),
+                    new File("app/src/main/java/lens/judge/b5/verifier/" + expectedFilePath)
             ));
 
             // Create a PrecisionToleranceComparer

@@ -4,29 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-/**
- * The WhiteSpaceToleranceComparer class is a decorator for the Verifier interface.
- * It ensures that the comparison ignores extra spaces by normalizing the strings
- * before verification.
- */
 public class WhiteSpaceToleranceComparer extends VerifierDecorator {
 
-    /**
-     * Constructs a WhiteSpaceToleranceComparer with the specified wrapped Verifier.
-     *
-     * @param wrappedVerifier the Verifier to be wrapped
-     */
     public WhiteSpaceToleranceComparer(Verifier wrappedVerifier) {
         super(wrappedVerifier);
     }
 
-    /**
-     * Verifies the output against the expected value after normalizing spaces.
-     *
-     * @param output the output string to be verified
-     * @param expected the expected string to compare against
-     * @return true if the normalized output matches the normalized expected string, false otherwise
-     */
     @Override
     public boolean verify(String output, String expected) {
         String normalizedOutput = normalizeSpaces(output);
@@ -34,15 +17,18 @@ public class WhiteSpaceToleranceComparer extends VerifierDecorator {
         return super.verify(normalizedOutput, normalizedExpected);
     }
 
-    /**
-     * Verifies the output file against the expected file after normalizing spaces.
-     *
-     * @param outputFile the output file to be verified
-     * @param expectedFile the expected file to compare against
-     * @return true if the normalized output matches the normalized expected file, false otherwise
-     */
     @Override
     public boolean verify(File outputFile, File expectedFile) {
-        return false,
+        try {
+            String output = normalizeSpaces(new String(Files.readAllBytes(outputFile.toPath())));
+            String expected = normalizeSpaces(new String(Files.readAllBytes(expectedFile.toPath())));
+            return verify(output, expected);
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading files", e);
+        }
+    }
+
+    private String normalizeSpaces(String input) {
+        return input.replaceAll("\\s+", " ");
     }
 }

@@ -1,11 +1,13 @@
 package lens.judge.b5.problem;
 
-import lens.judge.b5.problem.TestCase;
 import lens.judge.b5.verifier.Verifier;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Problem {
+
+public class Problem implements Iterable<TestCase> {
     private List<TestCase> testCases;
     private int timeLimit;
     private int memoryLimit;
@@ -18,44 +20,17 @@ public class Problem {
         this.verifier = verifier;
     }
 
+    public void addTestCase(TestCase testCase) {
+        testCases.add(testCase);
+    }
+
     public List<TestCase> getTestCases() {
         return testCases;
     }
 
-    public void setTestCases(List<TestCase> testCases) {
-        this.testCases = testCases;
-    }
-
-    public int getTimeLimit() {
-        return timeLimit;
-    }
-
-    public void setTimeLimit(int timeLimit) {
-        this.timeLimit = timeLimit;
-    }
-
-    public int getMemoryLimit() {
-        return memoryLimit;
-    }
-
-    public void setMemoryLimit(int memoryLimit) {
-        this.memoryLimit = memoryLimit;
-    }
-
+    @Override
     public Iterator<TestCase> iterator() {
         return testCases.iterator();
-    }
-
-    public void addTestCase(TestCase testCase) {
-        if (testCases != null) {
-            testCases.add(testCase);
-        }
-    }
-
-    public void removeTestCase(TestCase testCase) {
-        if (testCases != null) {
-            testCases.remove(testCase);
-        }
     }
 
     public boolean verifyTestCase(TestCase testCase) {
