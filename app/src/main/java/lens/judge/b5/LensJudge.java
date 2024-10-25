@@ -8,6 +8,7 @@ import lens.judge.b5.runner.RunnerBuilder;
 import lens.judge.b5.runner.Verdict;
 import lens.judge.b5.verifier.OrderToleranceComparer;
 import lens.judge.b5.verifier.StrictComparer;
+import lens.judge.b5.verifier.Verifier;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,8 +18,8 @@ public class LensJudge {
     public static void main(String[] args) {
         // Utilisation du chemin absolu du fichier source Java
         // String sourceFile = "app/src/test/resources/Test.java";
-        // String sourceFile = "test.c";
-        // String sourceFile = "test.cpp";
+        // String sourceFile = "app/src/test/resources/test.c";
+        // String sourceFile = "app/src/test/resources/test.cpp";
         // String sourceFile = "app/src/test/resources/test.py";
 
         if (args.length < 3) {
@@ -37,7 +38,6 @@ public class LensJudge {
         TestCase testCase = new TestCase(inputFile, expectedOutputFile);
         testCases.add(testCase);
         Problem problem = new Problem(testCases, 1000, 256, comparer );  // Limite de temps: 1000 ms, Limite de mémoire: 256 Mo
-        problem.addTestCase(testCase);
 
 
         // Itérer sur les TestCases du problème
@@ -69,7 +69,7 @@ public class LensJudge {
             ));
             */
 
-            Verdict verdict = runner.run();  // Exécuter le programme sans vérification pour le moment
+            boolean verdict = runner.run(inputFile, expectedOutputFile);  // Exécuter le programme sans vérification pour le moment
             System.out.println("TestCase verdict: " + verdict);
         }
     }
@@ -93,7 +93,6 @@ public class LensJudge {
     }
 }
 */
-
 
 
 

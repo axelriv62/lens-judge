@@ -1,5 +1,6 @@
 package lens.judge.b5.compiler;
 
+import lens.judge.b5.process.ProcessAdapter;
 
 public abstract class AbstractCompilationStrategy implements ICompilationStrategy {
 
@@ -29,7 +30,7 @@ public abstract class AbstractCompilationStrategy implements ICompilationStrateg
 //    }
 
     public void executeCommand(String command) throws Exception {
-        lens.judge.b5.process.ProcessAdapter process = new lens.judge.b5.process.ProcessAdapter(command.split(" "));
+        ProcessAdapter process = new ProcessAdapter(command.split(" "));
         process.start();
 
         // Attendre la fin du processus avant de continuer
